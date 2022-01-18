@@ -27,6 +27,7 @@
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react/jsx-filename-extension": [1, {"extensions": [".tsx"] }],
+      "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
       "import/prefere-default-export": "off",
       "import/extensions": [
         "error",
