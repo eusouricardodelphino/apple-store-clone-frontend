@@ -1,13 +1,13 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-const Edit: React.FC = () => {
-  const { productId } = useParams();
-  return (
-    <div>
-      <h1>Edit {productId}</h1>
-    </div>
-  );
-};
+import Form from '../../components/Form';
+import { Title } from './style';
+
+const Edit: React.FC = () => (
+  <>
+    <Title>Editar produto</Title>
+    <Form method="post" />
+  </>
+);
 
 export default Edit;

@@ -1,9 +1,13 @@
 import React from 'react';
 
+import Form from '../../components/Form';
+import { Title } from './style';
+
 const New: React.FC = () => (
-  <div>
-    <h1>New</h1>
-  </div>
+  <>
+    <Title>Novo produto</Title>
+    <Form method="post" />
+  </>
 );
 
 export default New;
