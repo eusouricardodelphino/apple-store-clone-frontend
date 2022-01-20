@@ -56,5 +56,6 @@ td {
 
 img {
   width: 50px;
+  height: 40px;
 }
 }`;

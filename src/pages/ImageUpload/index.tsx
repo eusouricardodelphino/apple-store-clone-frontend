@@ -1,11 +1,12 @@
 import React, { useState, FormEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Container } from './style';
+import { Container, Title } from './style';
 import api from '../../services/api';
 
 const ImageUpload: React.FC = () => {
   const [file, setFile] = useState<File>();
+  const [imgSrc, setImgSrc] = useState<string>();
   const { productId } = useParams();
   const navigate = useNavigate();
 
@@ -23,18 +24,25 @@ const ImageUpload: React.FC = () => {
     }
   };
 
+  const handleInputFileChange = (event: any) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setImgSrc(reader.result);
+        }
+      };
+    }
+  };
+
   return (
     <Container method="post" onSubmit={handleImageUploadSubmit}>
-      <input
-        type="file"
-        name="product_img"
-        onChange={(e) => {
-          if (e.target.files) {
-            setFile(e.target.files[0]);
-          }
-        }}
-      />
+      <Title>Faça o ipload de uma imagem respesentativa</Title>
       <button type="submit">Adicionar Imagem</button>
+      {imgSrc && <img src={imgSrc} alt="Preview da imagem para upload" />}
+      <input type="file" name="product_img" onChange={handleInputFileChange} />
     </Container>
   );
 };
