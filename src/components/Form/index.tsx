@@ -3,12 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
 import { Container } from './style';
+import FormProps from '../../interfaces/FormProps';
 
-interface Props {
-  method: string;
-}
-
-const Form: React.FC<Props> = ({ method }) => {
+const Form: React.FC<FormProps> = ({ method }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [name, setName] = useState('');

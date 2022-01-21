@@ -55,4 +55,8 @@ export const Table = styled.table`
     border: none;
     background: transparent;
   }
+
+  a {
+    color: #000;
+  }
 `;

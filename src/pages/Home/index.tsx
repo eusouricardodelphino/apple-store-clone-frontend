@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsEye, BsPencil, BsTrash, BsCamera } from 'react-icons/bs';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { TailSpin } from 'react-loader-spinner';
 
 import api from '../../services/api';
 import Product from '../../interfaces/Product';
@@ -8,14 +10,17 @@ import Product from '../../interfaces/Product';
 import { Container, Table } from './style';
 
 const Home: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = async () => {
     const response = await api.get('/products');
 
     const responseProducts = response.data;
-
-    setProducts(responseProducts);
+    setTimeout(() => {
+      setProducts(responseProducts);
+      setLoading(false);
+    }, 1000);
   };
 
   const deleteProduct = async (productToDeleteId: number) => {
@@ -42,10 +47,18 @@ const Home: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.length === 0 && (
+          {loading ? (
             <tr>
-              <td colSpan={5}>Nenhum produto cadastrado</td>
+              <td colSpan={5}>
+                <TailSpin width={40} height={40} color="#0071e3" />
+              </td>
             </tr>
+          ) : (
+            products.length === 0 && (
+              <tr>
+                <td colSpan={5}>Nenhum produto cadastrado</td>
+              </tr>
+            )
           )}
           {products.map((product) => (
             <tr key={product.id}>
